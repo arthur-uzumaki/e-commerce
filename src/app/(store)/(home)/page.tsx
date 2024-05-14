@@ -19,22 +19,23 @@ async function getFeaturedProducts(): Promise<Product[]> {
   return products
 }
 export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 1000))
   const [highlightedProduct, ...otherProducts] = await getFeaturedProducts()
-
   return (
-    <div className="grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6 ">
+    <div className=" grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6 ">
       <Link
         href={`/product/${highlightedProduct.slug}`}
-        className="group relative col-span-6 flex  items-end justify-center row-span-6 rounded-lg bg-zinc-900 overflow-hidden "
+        className="group relative col-span-6 flex items-end justify-center  row-span-6 rounded-lg bg-zinc-900 overflow-hidden "
       >
         <Image
           src={`${highlightedProduct.image}`}
+          className=" group-hover:scale-105 transition-transform duration-500 "
           width={920}
           height={920}
           alt=""
           quality={100}
-          className=" group-hover:scale-105 transition-transform duration-500 "
         />
+
         <div className="absolute bottom-28 right-28 h-12 flex items-center gap-2 max-w-[280px] rounded-full border-2 border-zinc-500 bg-black/60 pl-5 ">
           <span className="text-sm truncate ">{highlightedProduct.title}</span>
           <span className="bg-violet-500 flex items-center  h-full rounded-full justify-center px-4 text-center font-semibold ">
@@ -53,16 +54,19 @@ export default async function Home() {
           <Link
             key={product.id}
             href={`/product/${product.slug}`}
-            className="relative group col-span-3 row-span-3 flex  items-end justify-center bg-zinc-900 rounded-lg overflow-hidden"
+            className="relative group col-span-3 row-span-3 flex justify-center bg-zinc-900 rounded-lg overflow-hidden"
           >
-            <Image
-              src={product.image}
-              width={920}
-              height={920}
-              alt=""
-              quality={100}
-              className=" group-hover:scale-105 transition-transform duration-500"
-            />
+            <div className="absolute top-16 flex justify-center">
+              <Image
+                src={product.image}
+                width={920}
+                height={920}
+                quality={100}
+                alt=""
+                className="group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
             <div className="absolute bottom-10  right-10 h-12 flex items-center gap-2 max-w-[280px] rounded-full border-2 border-zinc-500 bg-black/60 pl-5 ">
               <span className="text-sm truncate ">{product.title}</span>
               <span className="bg-violet-500 flex items-center  h-full rounded-full justify-center px-4 text-center font-semibold ">
