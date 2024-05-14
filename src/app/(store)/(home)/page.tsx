@@ -3,12 +3,21 @@ import { api } from '@/data/api'
 import Image from 'next/image'
 import Link from 'next/link'
 
+/**
+ * Cache & memoization
+ *
+ */
+
 async function getFeaturedProducts(): Promise<Product[]> {
-  const response = await api('/products/featured')
+  const revalidateOneHour = 60 * 60
+  const response = await api('/products/featured', {
+    next: {
+      revalidate: revalidateOneHour,
+    },
+  })
   const products = await response.json()
   return products
 }
-
 export default async function Home() {
   const [highlightedProduct, ...otherProducts] = await getFeaturedProducts()
 
