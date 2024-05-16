@@ -1,5 +1,6 @@
 import { Product } from '@/data/@types/products'
 import { api } from '@/data/api'
+import { Metadata } from 'next'
 import Image from 'next/image'
 
 interface ProductProps {
@@ -17,6 +18,15 @@ async function getProduct(slug: string): Promise<Product> {
   })
   const product = await response.json()
   return product
+}
+
+export async function generateMetadata({
+  params,
+}: ProductProps): Promise<Metadata> {
+  const product = await getProduct(params.slug)
+  return {
+    title: product.title,
+  }
 }
 
 export default async function ProductPage({ params }: ProductProps) {
@@ -40,7 +50,10 @@ export default async function ProductPage({ params }: ProductProps) {
         </p>
 
         <div className="mt-8 flex items-center gap-3">
-          <span className="inline-block px-5 py-2.5 font-semibold bg-violet-500 rounded-full">
+          <span
+            className="inline-block px-5 py-2.5 font-semibold bg-violet-500 
+          rounded-full"
+          >
             {product.price.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
@@ -63,25 +76,29 @@ export default async function ProductPage({ params }: ProductProps) {
         <div className="flex gap-2 mt-4">
           <button
             type="button"
-            className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 "
+            className="flex h-9 w-14 items-center justify-center 
+            rounded-full border border-zinc-700 bg-zinc-900 "
           >
             P
           </button>
           <button
             type="button"
-            className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 "
+            className="flex h-9 w-14 items-center justify-center rounded-full
+             border border-zinc-700 bg-zinc-900 "
           >
             M
           </button>
           <button
             type="button"
-            className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 "
+            className="flex h-9 w-14 items-center justify-center rounded-full 
+            border border-zinc-700 bg-zinc-900 "
           >
             G
           </button>
           <button
             type="button"
-            className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 "
+            className="flex h-9 w-14 items-center justify-center rounded-full 
+            border border-zinc-700 bg-zinc-900 "
           >
             GG
           </button>
@@ -89,7 +106,9 @@ export default async function ProductPage({ params }: ProductProps) {
 
         <button
           type="button"
-          className="bg-emerald-600 rounded-full text-white h-12 mt-8 flex justify-center items-center font-semibold hover:bg-emerald-400"
+          className="bg-emerald-600 rounded-full text-white h-12 mt-8 
+          flex justify-center items-center font-semibold transition-colors
+           hover:bg-emerald-400 "
         >
           Adicionar ao carrinho
         </button>
