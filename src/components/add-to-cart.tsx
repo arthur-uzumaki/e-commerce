@@ -14,7 +14,7 @@ export function AddToCart({ productId }: AddToCartProps) {
     <button
       type="button"
       className="bg-emerald-600 rounded-full text-white h-12 mt-8 
-  flex justify-center items-center font-semibold transition-colors duration-1000 
+  flex justify-center items-center font-semibold transition-colors duration-500 
    hover:bg-emerald-400"
       onClick={handleAddToCart}
     >
