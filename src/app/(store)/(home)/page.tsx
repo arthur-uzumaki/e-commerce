@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   title: 'Home',
 }
 export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
   const [highlightedProduct, ...otherProducts] = await getFeaturedProducts()
   return (
     <div className=" grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6 ">
