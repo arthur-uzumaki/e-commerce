@@ -33,17 +33,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Cache Cypress Binary
         uses: actions/cache@v4
         with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          path: /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            cypress-${{ runner.os }}-cypress-
-        
+            ${{ runner.os }}-cypress-
+
+      - name: Install dependencies
+        run: pnpm install        
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
@@ -51,4 +51,4 @@ jobs:
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-cyan.vercel.app"
         with:
           build: npm run build
-          start: npm start2s
+          start: npm start
