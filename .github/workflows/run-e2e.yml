@@ -48,9 +48,15 @@ jobs:
         run: npx cypress install
 
       - name: Build application
+        env:
+          APP_URL: "http://localhost:3000"
+          NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-cyan.vercel.app"
         run: npm run build
 
       - name: Start application
+        env:
+          APP_URL: "http://localhost:3000"
+          NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-cyan.vercel.app"
         run: npm start &
         
       - name: Wait for application to be available
@@ -61,6 +67,3 @@ jobs:
         env:
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-cyan.vercel.app"
-        with:
-          build: npm run build
-          start: npm start
