@@ -13,7 +13,7 @@
 - Aplicação usando Next.js
 - Usando Tailwindcss
 - Usando Cypress
-- Usando Material Top Tabs Navigator
+
 
 ## Rodar o projeto
 
